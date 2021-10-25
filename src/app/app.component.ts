@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ICource } from './core/models/cource';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'video-portal-app';
+export class AppComponent implements OnInit{
+
+  ngOnInit(): void {
+  }
+
 }

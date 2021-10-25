@@ -8,4 +8,16 @@
     margin: auto 0 auto auto;
     background-color: rgb(12, 158, 226)
   }
+  &__more{
+    padding: 35px 25px;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 20px;
+  }
+  &__more-link{
+    width: 130px;
+    display: block;
+    margin: 0 auto;
+    text-transform: uppercase;
+  }
 }

@@ -1,8 +1,12 @@
 <div class="cource-list">
   <div class="container">
     <cource-search></cource-search>
-    <button class="btn cource-list__add-cource">Add cource</button>
-    <cource></cource>
-
+    <button class="btn cource-list__add-cource" (click)="addCource()">Add cource</button>
+    <cource
+    (onDelete)="courceDelete($event)"
+    *ngFor="let cource of videoCources; trackBy: trackById" [cource]="cource"></cource>
+    <div class="cource-list__more">
+      <a href="javascript: void(0);"  (click)="loadMore()" class="cource-list__more-link">load more</a>
+    </div>
   </div>
 </div>

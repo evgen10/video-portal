@@ -4,6 +4,7 @@
   padding: 35px 25px;
   background-color: white;
   border-radius: 15px;
+  margin-top: 20px;
   &__data{
     display: flex;
     flex-direction: column;
@@ -15,8 +16,9 @@
     align-items: center;
   }
   &__date-info{
+    width: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
   }
   &__actions{
@@ -24,6 +26,8 @@
     justify-content: space-around;
     align-items: center;
     width: 15%;
-
+  }
+  &__descr{
+    padding-top: 10px;
   }
 }
