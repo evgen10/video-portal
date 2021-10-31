@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { CourceSearchComponent } from './cource-search.component';
 
@@ -22,4 +23,10 @@ describe('CourceSearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should clear input after search', () => {
+    component.searchText = 'some text for search';
+    component.search();
+    expect(component.searchText).toBe('')
+  })
 });

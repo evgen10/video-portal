@@ -29,7 +29,6 @@ export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContent
   }
   ngDoCheck(): void {
     console.log('Cource ngDoCheck');
-    this.cource!.simpleDate = this.cource?.creationDate.getDate()
   }
 
   ngOnInit(): void {

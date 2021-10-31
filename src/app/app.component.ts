@@ -8,6 +8,7 @@ import { ICource } from './core/models/cource';
 })
 export class AppComponent implements OnInit{
 
+  title = 'video-portal-app';
   ngOnInit(): void {
   }
 
