@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ICource } from 'src/app/core/models/cource';
@@ -5,13 +6,29 @@ import { ICource } from 'src/app/core/models/cource';
 import { CourceComponent } from './cource.component';
 
 describe('CourceComponent', () => {
+  @Component({
+    template: `<cource (onDelete)="courceDelete($event)" [cource]="cource"></cource>`
+  })
+  class TestCourceListComponent{
+    cource: ICource = {
+      id: 2,
+      duration: 108,
+      description: "decr",
+      title: 'title',
+      creationDate: new Date()
+    };
+  };
+
+  let hostComponent: TestCourceListComponent;
+  let testFixture: ComponentFixture<TestCourceListComponent>;
+
   let component: CourceComponent;
   let fixture: ComponentFixture<CourceComponent>;
   let cource: ICource;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourceComponent ]
+      declarations: [ CourceComponent, TestCourceListComponent ]
     })
     .compileComponents();
   });
@@ -27,7 +44,13 @@ describe('CourceComponent', () => {
       creationDate: new Date()
     };
     component.cource = cource;
+
+    //host component settings
+    testFixture = TestBed.createComponent(TestCourceListComponent);
+    hostComponent = testFixture.componentInstance;
+
     fixture.detectChanges();
+    testFixture.detectChanges();
   });
 
   it('should create', () => {
@@ -70,9 +93,7 @@ describe('CourceComponent', () => {
   });
 
   it('should render cource description', () => {
-    let element = fixture.debugElement.query(By.css('.cource__descr'))
-    let htmlElement = element.nativeElement;
-
-    expect(htmlElement.textContent).toContain(cource.description.toString());
+    let courceEl = testFixture.nativeElement.querySelector('.cource__descr');
+    expect(courceEl.textContent).toBe(hostComponent.cource.description);
   });
 });
