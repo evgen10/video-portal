@@ -41,7 +41,8 @@ describe('CourceComponent', () => {
       duration: 105,
       description: "decr",
       title: 'title',
-      creationDate: new Date()
+      creationDate: new Date(),
+      istopRate: false
     };
     component.cource = cource;
 

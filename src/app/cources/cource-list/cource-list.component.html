@@ -2,11 +2,18 @@
   <div class="container">
     <cource-search></cource-search>
     <button class="btn cource-list__add-cource" (click)="addCource()">Add cource</button>
-    <cource
-    (onDelete)="courceDelete($event)"
-    *ngFor="let cource of videoCources; trackBy: trackById" [cource]="cource"></cource>
-    <div class="cource-list__more">
-      <a href="javascript: void(0);"  (click)="loadMore()" class="cource-list__more-link">load more</a>
-    </div>
+    <div *ngIf="videoCources.length > 1; then cources else emptyCources"></div>
+    <ng-template #cources>
+      <cource (onDelete)="courceDelete($event)" *ngFor="let cource of videoCources; trackBy: trackById" [cource]="cource">
+      </cource>
+      <div class="cource-list__more">
+        <a href="javascript: void(0);" (click)="loadMore()" class="cource-list__more-link">load more</a>
+      </div>
+    </ng-template>
+    <ng-template #emptyCources>
+      <div class="cource-list__empty">
+          no data. feel free to add new cource
+      </div>
+    </ng-template>
   </div>
 </div>

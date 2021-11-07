@@ -1,7 +1,10 @@
-<div class="cource">
+<div [appCourceHighlight] ='cource!.creationDate' [ngClass]="cource?.istopRate ? 'cource_topRated' : '' " class="cource">
   <div class="cource__data">
     <div class="cource__title">
-      <h2>{{cource?.title}}</h2>
+      <div class="cource__header">
+        <h2>{{cource?.title}}</h2>
+        <img *ngIf="cource?.istopRate" class="cource__rate" src="../../../assets/icons/star.svg" alt="star">
+      </div>
       <div class="cource__date-info">
         <div class="cource__duration">{{cource?.duration}}</div>
         <div class="cource__date">{{cource?.creationDate}}</div>

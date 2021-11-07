@@ -5,4 +5,5 @@ export interface ICource {
   duration: number;
   description: string;
   simpleDate?: number;
+  istopRate: boolean;
 }
