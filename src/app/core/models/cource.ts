@@ -4,4 +4,5 @@ export interface ICource {
   creationDate: Date;
   duration: number;
   description: string;
+  simpleDate?: number;
 }

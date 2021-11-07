@@ -1,1 +1,16 @@
-<p>cource works!</p>
+<div class="cource">
+  <div class="cource__data">
+    <div class="cource__title">
+      <h2>{{cource?.title}}</h2>
+      <div class="cource__date-info">
+        <div class="cource__duration">{{cource?.duration}}</div>
+        <div class="cource__date">{{cource?.simpleDate}}</div>
+      </div>
+    </div>
+    <div class="cource__descr">{{cource?.description}}</div>
+  </div>
+  <div class="cource__actions">
+    <button class="btn btn__simple">Edit</button>
+    <button class="btn btn__simple" (click)="delete(cource?.id)">Delete</button>
+  </div>
+</div>

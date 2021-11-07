@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourceSearchComponent implements OnInit {
 
+  public searchText: string =  '';
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public search(){
+    console.log(this.searchText);
+    this.searchText = '';
+  }
 }

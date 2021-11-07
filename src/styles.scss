@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  position: relative;
+}
+
+.container{
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.btn{
+  display: block;
+  height: 30px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:active{
+    border: 1px solid black;
+  }
+  &__simple{
+    width: 60px;
+    background-color: rgb(12, 158, 226);
+    color: white;
+  }
+  &__submit{
+    height: 30px;
+    width: 80px;
+    background-color: rgb(12, 226, 65);
+    color: white;
+  }
+
+
+}

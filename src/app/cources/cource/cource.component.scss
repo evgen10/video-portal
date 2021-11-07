@@ -1,0 +1,33 @@
+.cource{
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 25px;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 20px;
+  &__data{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+  }
+  &__title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__date-info{
+    width: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &__actions{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 15%;
+  }
+  &__descr{
+    padding-top: 10px;
+  }
+}

@@ -9,6 +9,7 @@ import { CourceListComponent } from './cources/cource-list/cource-list.component
 import { CourceComponent } from './cources/cource/cource.component';
 import { BreadcrumbsComponent } from './elements/breadcrumbs/breadcrumbs.component';
 import { LogoComponent } from './elements/logo/logo.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { LogoComponent } from './elements/logo/logo.component';
     CourceSearchComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
