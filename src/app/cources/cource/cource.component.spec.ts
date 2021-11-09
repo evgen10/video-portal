@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { ICource } from 'src/app/core/models/cource';
 
 import { CourceComponent } from './cource.component';
+import { DurationPipe } from './pipes/duration.pipe';
 
 describe('CourceComponent', () => {
   @Component({
@@ -15,7 +16,8 @@ describe('CourceComponent', () => {
       duration: 108,
       description: "decr",
       title: 'title',
-      creationDate: new Date()
+      creationDate: new Date(),
+      istopRate: true
     };
   };
 
@@ -28,7 +30,8 @@ describe('CourceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourceComponent, TestCourceListComponent ]
+      declarations: [ CourceComponent, TestCourceListComponent ],
+      providers: [DurationPipe]
     })
     .compileComponents();
   });

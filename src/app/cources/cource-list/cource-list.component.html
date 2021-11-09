@@ -1,10 +1,10 @@
 <div class="cource-list">
   <div class="container">
-    <cource-search></cource-search>
+    <cource-search (onSearch)="searchCources($event)" ></cource-search>
     <button class="btn cource-list__add-cource" (click)="addCource()">Add cource</button>
     <div *ngIf="videoCources.length > 1; then cources else emptyCources"></div>
     <ng-template #cources>
-      <cource (onDelete)="courceDelete($event)" *ngFor="let cource of videoCources; trackBy: trackById" [cource]="cource">
+      <cource (onDelete)="courceDelete($event)" *ngFor="let cource of getCourceList() | courceSort; trackBy: trackById" [cource]="cource">
       </cource>
       <div class="cource-list__more">
         <a href="javascript: void(0);" (click)="loadMore()" class="cource-list__more-link">load more</a>

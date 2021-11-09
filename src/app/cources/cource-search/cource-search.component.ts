@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'cource-search',
@@ -8,13 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class CourceSearchComponent implements OnInit {
 
   public searchText: string =  '';
+  @Output()
+  public onSearch = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   public search(){
-    console.log(this.searchText);
-    this.searchText = '';
+    this.onSearch.emit(this.searchText);
   }
 }

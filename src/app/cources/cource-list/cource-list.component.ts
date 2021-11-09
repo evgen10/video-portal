@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ICource } from 'src/app/core/models/cource';
+import { CourceSortPipe } from '../cource/pipes/cource-sort.pipe';
+import { FilterCourcesPipe } from '../cource/pipes/filter-cources.pipe';
 
 @Component({
   selector: 'cource-list',
@@ -9,10 +11,16 @@ import { ICource } from 'src/app/core/models/cource';
 export class CourceListComponent implements OnInit {
 
   public videoCources: Array<ICource> = [];
+  public searchText: string = '';
 
-  constructor() { }
+  constructor(private courceFilterPipe: FilterCourcesPipe) { }
 
   ngOnInit(): void {
+  }
+
+
+  public getCourceList(){
+    return this.courceFilterPipe.transform(this.videoCources, this.searchText);
   }
 
   //just for prove track by works
@@ -22,7 +30,7 @@ export class CourceListComponent implements OnInit {
         id: 1,
         title: 'Social Media Success: Video Storytelling on YouTube & Beyond',
         creationDate: new Date(2022, 3, 25),
-        duration: 250,
+        duration: 55,
         description: "Videos go viral for a reason: because they capture a truth or tell a story that resonates with viewers. Whether silly or sincere, an authentic story makes you feel seen, feel good, and feel like part of a community. Storytelling is also the engine that’s powered Lilly Singh from posting DIY comedy sketches in the early days of YouTube to today hosting a late-night talk show and connecting with 15M followers (and counting!) around the world. ",
         istopRate: true
       },
@@ -30,7 +38,7 @@ export class CourceListComponent implements OnInit {
         id: 2,
         title: 'How to Speak Confidently On Camera: A Guide for Content Creators',
         creationDate: new Date(2021, 10, 7),
-        duration: 250,
+        duration: 63,
         description: "Video plays a massive role in our lives. It helps us get informed on the world and to learn new things. The ability to express oneself on video is an extremely important skill in the 21st century, and it's only going to become more valuable. Being able to speak on camera has played a major role in building my entire career. ",
         istopRate: false
       },
@@ -38,7 +46,7 @@ export class CourceListComponent implements OnInit {
         id: 3,
         title: 'Going Viral: Write, Film & Make Content People Share',
         creationDate: new Date(2021, 3, 25),
-        duration: 250,
+        duration: 160,
         description: "Join writer, comedian & social media star Matt Bellassai to learn how to create hit online content that people read, watch, follow & share! Matt Bellassai is famous for his irreverent takes on adulthood. Whether you follow his hilarious Twitter feed, watch his weekly Facebook series To Be Honest, or saw him formerly star in Buzzfeed's Whine About It, there's a good chance you've laughed at his jokes.",
         istopRate: false
       },
@@ -46,9 +54,9 @@ export class CourceListComponent implements OnInit {
         id: 4,
         title: 'Going Viral: Write, Film & Make Content People Share',
         creationDate: new Date(2021, 3, 25),
-        duration: 250,
+        duration: 58,
         description: "Join writer, comedian & social media star Matt Bellassai to learn how to create hit online content that people read, watch, follow & share! Matt Bellassai is famous for his irreverent takes on adulthood. Whether you follow his hilarious Twitter feed, watch his weekly Facebook series To Be Honest, or saw him formerly star in Buzzfeed's Whine About It, there's a good chance you've laughed at his jokes.",
-        istopRate: false
+        istopRate: true
       }
     ]
 
@@ -66,4 +74,7 @@ export class CourceListComponent implements OnInit {
     console.log('Load more button');
   }
 
+  public searchCources(text: string){
+    this.searchText = text;
+  }
 }
