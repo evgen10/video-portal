@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { CourceSortPipe } from '../cource/pipes/cource-sort.pipe';
+import { FilterCourcesPipe } from '../cource/pipes/filter-cources.pipe';
 
 import { CourceListComponent } from './cource-list.component';
 
@@ -9,7 +11,8 @@ describe('CourceListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourceListComponent ]
+      declarations: [ CourceListComponent ],
+      providers: [FilterCourcesPipe, CourceSortPipe]
     })
     .compileComponents();
   });
@@ -23,11 +26,6 @@ describe('CourceListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should create video cources', () => {
-    component.ngOnInit();
-    expect(component.videoCources.length == 3).toBeTruthy();
-  })
 
   it('should create add a video cource', () => {
     component.ngOnInit();

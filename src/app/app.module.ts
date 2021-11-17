@@ -10,6 +10,10 @@ import { CourceComponent } from './cources/cource/cource.component';
 import { BreadcrumbsComponent } from './elements/breadcrumbs/breadcrumbs.component';
 import { LogoComponent } from './elements/logo/logo.component';
 import { FormsModule } from '@angular/forms';
+import { CourceHighlightDirective } from './cources/cource/directives/cource-highlight.directive';
+import { DurationPipe } from './cources/cource/pipes/duration.pipe';
+import { CourceSortPipe } from './cources/cource/pipes/cource-sort.pipe';
+import { FilterCourcesPipe } from './cources/cource/pipes/filter-cources.pipe';
 
 
 @NgModule({
@@ -22,12 +26,16 @@ import { FormsModule } from '@angular/forms';
     CourceListComponent,
     CourceComponent,
     CourceSearchComponent,
+    CourceHighlightDirective,
+    DurationPipe,
+    CourceSortPipe,
+    FilterCourcesPipe,
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [FilterCourcesPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

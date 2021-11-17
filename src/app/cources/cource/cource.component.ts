@@ -13,26 +13,19 @@ export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContent
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('Cource ngOnChanges');
   }
   ngAfterContentInit(): void {
-    console.log('Cource ngAfterContentInit');
   }
   ngAfterContentChecked(): void {
-    console.log('Cource ngAfterContentChecked');
   }
   ngAfterViewInit(): void {
-    console.log('Cource ngAfterContentChecked');
   }
   ngAfterViewChecked(): void {
-    console.log('Cource ngAfterViewChecked');
   }
   ngDoCheck(): void {
-    console.log('Cource ngDoCheck');
   }
 
   ngOnInit(): void {
-    console.log('Cource ngOnInit');
   }
 
   public delete(id: number | any) {

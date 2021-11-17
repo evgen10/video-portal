@@ -1,10 +1,10 @@
-<div class="cource">
+<div [appCourceHighlight] ='cource!.creationDate' [ngClass]="cource?.istopRate ? 'cource_topRated' : '' " class="cource">
   <div class="cource__data">
     <div class="cource__title">
-      <h2>{{cource?.title}}</h2>
+      <h2 class="cource__header" [ngClass]="{cource__rate : cource?.istopRate}">{{cource?.title | uppercase}}</h2>
       <div class="cource__date-info">
-        <div class="cource__duration">{{cource?.duration}}</div>
-        <div class="cource__date">{{cource?.creationDate}}</div>
+        <div class="cource__duration">{{cource!.duration | duration}}</div>
+        <div class="cource__date">{{cource?.creationDate | date:'d MMM y'}}</div>
       </div>
     </div>
     <div class="cource__descr">{{cource?.description}}</div>

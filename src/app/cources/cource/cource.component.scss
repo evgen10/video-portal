@@ -5,6 +5,9 @@
   background-color: white;
   border-radius: 15px;
   margin-top: 20px;
+  &_topRated{
+    background-color:rgba(221, 250, 204, 0.959)
+  }
   &__data{
     display: flex;
     flex-direction: column;
@@ -13,10 +16,10 @@
   &__title{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
   &__date-info{
-    width: 60px;
+    width: 255px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -29,5 +32,32 @@
   }
   &__descr{
     padding-top: 10px;
+  }
+  &__duration{
+    display: flex;
+    align-items: center;
+    &::before{
+      content: url('../../../assets/icons/clock.svg');
+      width: 20px;
+      margin-right: 5px;
+    }
+  }
+  &__date{
+    display: flex;
+    align-items: center;
+    &::before{
+      content: url('../../../assets/icons/date.svg');
+      width: 20px;
+      margin-right: 5px;
+    }
+  }
+  &__rate{
+    &::after{
+      margin-left: 10px;
+      display:inline-block;
+      vertical-align: middle;
+      content: url('../../../assets/icons/star.svg');
+      width: 20px;
+    }
   }
 }
