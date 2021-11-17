@@ -1,0 +1,21 @@
+.modal{
+  width: 500px;
+  background: #fff;
+  margin-top: 50px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 20px;
+  &__actions{
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &__title{
+    text-align: center;
+    font-size: 20px;
+  }
+}

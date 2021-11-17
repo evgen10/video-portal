@@ -1,0 +1,36 @@
+.login{
+  position: absolute;
+  width: 400px;
+  left: 50%;
+  top: 300px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  padding: 30px 25px;
+  &__title{
+    color: white;
+  }
+  background-color: rgb(27, 26, 26);
+  &__form{
+    display: block;
+    margin-top: 30px;
+    color: white;
+    input{
+      margin-top: 10px;
+      padding-left: 20px;
+      border-radius: 10px;
+      width: 95%;
+      height: 40px;
+    }
+  }
+  &__actions{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  &__fogot-link{
+    font-size: 15px;
+    color: white;
+  }
+}
