@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {  Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit{
 
   constructor(private authService: AuthService) { }
 
@@ -18,5 +18,6 @@ export class LoginPageComponent implements OnInit {
 
   public login(){
     this.authService.login(this.userLogin, this.userPassword)
+    console.log('logged in successfully', this.authService.isAuthenticated());
   }
 }

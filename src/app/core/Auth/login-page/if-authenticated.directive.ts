@@ -1,4 +1,4 @@
-import { Directive, DoCheck, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, Directive, DoCheck, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 @Directive({
@@ -19,10 +19,12 @@ export class IfAuthenticatedDirective implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.isShow ? !this.authService.isAuthenticated() : this.authService.isAuthenticated()) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
-    } else {
-      this.viewContainer.clear();
-    }
+    this.authService.isAuthenticated().subscribe(x => {
+      if (this.isShow ? !x: x) {
+        this.viewContainer.createEmbeddedView(this.templateRef);
+      } else {
+        this.viewContainer.clear();
+      }
+    })
   }
 }

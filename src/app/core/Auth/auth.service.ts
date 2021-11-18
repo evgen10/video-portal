@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IUser } from '../models/user';
 
 @Injectable({
@@ -8,11 +9,11 @@ export class AuthService {
 
   public currentUser: IUser | null = null;
 
-  private _isAuthenticated = false;
+  private _isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
-  public isAuthenticated() : boolean {
+  public isAuthenticated() : BehaviorSubject<boolean> {
     return this._isAuthenticated;
   }
 
@@ -24,12 +25,12 @@ export class AuthService {
       userLogin: userLogin,
       password: userPassword,
     }
-    this._isAuthenticated = true;
+    this._isAuthenticated.next(true);
   }
 
   public logout() {
     this.currentUser = null;
-    this._isAuthenticated = false;
+    this._isAuthenticated.next(false);
   }
 
   public getUserInfo() {
