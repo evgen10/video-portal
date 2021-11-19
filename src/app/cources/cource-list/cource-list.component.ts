@@ -16,12 +16,15 @@ export class CourceListComponent implements OnInit, DoCheck {
   public searchText: string = '';
 
   public isDeleteModalShow = false;
+  public isShowAdd = false;
+  public isShowList = false;
 
   constructor(
     private courceFilterPipe: FilterCourcesPipe,
     private courceService: CourceService) { }
 
   ngDoCheck(): void {
+    this.isShowList = !this.isShowAdd;
     this.videoCources = this.courceService.getAll();
   }
 
@@ -34,7 +37,7 @@ export class CourceListComponent implements OnInit, DoCheck {
   }
 
   public addCource() {
-    this.courceService.add()
+    this.isShowAdd = true;
   }
 
   public trackById(index: number, cource: ICource): number {
@@ -67,5 +70,9 @@ export class CourceListComponent implements OnInit, DoCheck {
   public onDeleteCource(id: number) {
     this.isDeleteModalShow = true;
     this.deleteCourceId = id;
+  }
+
+  public onAddWindowClose(){
+    this.isShowAdd = false;
   }
 }

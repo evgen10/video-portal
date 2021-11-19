@@ -1,0 +1,19 @@
+.cource-add-windows{
+  position: absolute;
+  width: 30%;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 30px;
+  &__element{
+    margin-top: 15px;
+  }
+  &__actions {
+    display: flex;
+    justify-content:space-between;
+    width: 150px;
+    float: right;
+  }
+}

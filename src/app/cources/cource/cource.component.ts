@@ -1,11 +1,12 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ICource } from 'src/app/core/models/cource';
 import { CourceService } from '../services/cource.service';
 
 @Component({
   selector: 'cource',
   templateUrl: './cource.component.html',
-  styleUrls: ['./cource.component.scss']
+  styleUrls: ['./cource.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
 

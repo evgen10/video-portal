@@ -1,0 +1,15 @@
+
+.app__input{
+  input{
+    width: 200px;
+  }
+
+}
+.app__input_duration{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.app__input_duration-value{
+  margin-left: 10px;
+}
