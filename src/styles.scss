@@ -16,6 +16,9 @@ html{
   width: 1200px;
 }
 
+.main{
+  margin-top: 50px;
+}
 .btn{
   display: block;
   height: 30px;
@@ -37,6 +40,19 @@ html{
     background-color: rgb(12, 226, 65);
     color: white;
   }
-
-
+  &_login-btn{
+    width: 80px;
+    height: 40px;
+    background-color: white;
+  }
 }
+
+.backdrop{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0 ,0, .3);
+}
+

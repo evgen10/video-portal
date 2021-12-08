@@ -1,0 +1,15 @@
+<div class="login">
+  <h1 class="login__title">Login</h1>
+  <label for="" class="login__form">
+    <div class="login__form-title">E-mail</div>
+    <input required type="text" placeholder="Enter email"  [(ngModel)]="userLogin">
+  </label>
+  <label for="" class="login__form">
+    <div class="login__form-title">Password</div>
+    <input required type="password" placeholder="Enter password"  [(ngModel)]="userPassword">
+  </label>
+  <div class="login__actions">
+    <a href="javascript: void(0);" class="login__fogot-link">Fogot password</a>
+    <button type="submit" (click)="login()" class="btn btn_login-btn">Login</button>
+  </div>
+</div>

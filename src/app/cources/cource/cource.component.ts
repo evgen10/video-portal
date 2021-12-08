@@ -1,5 +1,6 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ICource } from 'src/app/core/models/cource';
+import { CourceService } from '../services/cource.service';
 
 @Component({
   selector: 'cource',
@@ -9,9 +10,11 @@ import { ICource } from 'src/app/core/models/cource';
 export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
 
   @Input() cource: ICource | null = null;
-  @Output() onDelete = new EventEmitter<number>();
+  @Output() deleteCource = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(
+    private courceService: CourceService) { }
+
   ngOnChanges(changes: SimpleChanges): void {
   }
   ngAfterContentInit(): void {
@@ -28,7 +31,7 @@ export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContent
   ngOnInit(): void {
   }
 
-  public delete(id: number | any) {
-    this.onDelete.emit(id);
+  public delete() {
+    this.deleteCource.emit(this.cource?.id);
   }
 }
