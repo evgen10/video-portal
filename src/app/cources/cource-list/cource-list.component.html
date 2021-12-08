@@ -1,7 +1,7 @@
 
 <confirmation-dialog *ngIf='isDeleteModalShow' (decline)="closeDeleteModal()" (confirm)="confirmDeleteAction()"></confirmation-dialog>
-
-<div class="cource-list">
+<add-cource *ngIf='isShowAdd' (onClose)="onAddWindowClose()"></add-cource>
+<div *ngIf='isShowList' class="cource-list">
   <div class="container">
     <cource-search (onSearch)="searchCources($event)" ></cource-search>
     <button class="btn cource-list__add-cource" (click)="addCource()">Add cource</button>

@@ -18,10 +18,7 @@ export class CourceHighlightDirective implements OnChanges {
 
   changeBordre(){
     const currentDate = new Date(Date.now());
-    console.log('Today' + currentDate);
     const rangeDate = new Date(new Date().setDate(currentDate.getDate() - this.daysCourceNew));
-    console.log('RAnge' + rangeDate);
-    console.log('courceCreationDat' + this.courceCreationDate);
     if (this.courceCreationDate < currentDate && this.courceCreationDate >= rangeDate) {
       this.renderer.setStyle(this.element.nativeElement, 'border','2px solid #79F30F' );
     } else if (this.courceCreationDate > currentDate) {

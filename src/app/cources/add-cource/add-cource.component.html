@@ -1,0 +1,32 @@
+<div class="cource-add-windows">
+  <h2 class="cource-add-windows__title">New cource</h2>
+  <div class="cource-add-windows__element">
+    <label class="app__input" for="">
+      <div class="app__input-title">Title:</div>
+      <input type="text" placeholder="Text input" [(ngModel)]="title">
+    </label>
+  </div>
+  <div class="cource-add-windows__element">
+    <label class="app__input" for="">
+      <div class="app__input-title">Description:</div>
+      <textarea rows="10" cols="45" name="text" placeholder="Add description" [(ngModel)]="description"></textarea>
+    </label>
+  </div>
+  <div class="cource-add-windows__element">
+    <duration-input></duration-input>
+  </div>
+  <div class="cource-add-windows__element">
+    <date-input></date-input>
+  </div>
+  <div class="cource-add-windows__element">
+    <div class="cource-add-windows__actions">
+      <button class="btn" (click)="closeWindow()">Cancel</button>
+      <button class="btn btn__submit" (click)="saveCource()">Save</button>
+    </div>
+  </div>
+
+
+
+
+
+</div>

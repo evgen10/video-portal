@@ -1,0 +1,7 @@
+<label class="app__input" for="">
+  <div class="app__input-title">Duration:</div>
+  <div class="app__input_duration">
+    <input type="number" placeholder="minutes" [(ngModel)]="duration">
+    <div class="app__input_duration-value">{{duration | duration}}</div>
+  </div>
+</label>

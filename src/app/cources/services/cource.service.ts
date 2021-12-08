@@ -5,6 +5,8 @@ import { ICource } from "src/app/core/models/cource";
   providedIn: 'root'})
 export class CourceService {
 
+  public maxId: number = 0;
+
   public videoCources: Array<ICource> = [
     {
       id: 1,
@@ -40,12 +42,22 @@ export class CourceService {
     }
   ]
 
+  constructor() {
+    this.maxId = Math.max.apply(null, this.videoCources.map(x => x.id));
+  }
+
+  public setCourceId(){
+    this.maxId == this.maxId++;
+    return this.maxId;
+  }
+
   public getAll(): Array<ICource>{
     return this.videoCources;
   }
 
-  public add() {
-    console.log('New cource added');
+  public add(cource: ICource) {
+    this.videoCources.unshift(cource);
+    console.log('New cource added', this.videoCources);
   }
 
   public getById(id: number): ICource | null {
