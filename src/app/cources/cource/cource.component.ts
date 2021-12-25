@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICource } from 'src/app/core/models/cource';
 import { CourceService } from '../services/cource.service';
 
@@ -14,7 +15,8 @@ export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContent
   @Output() deleteCource = new EventEmitter<number>();
 
   constructor(
-    private courceService: CourceService) { }
+    private courceService: CourceService,
+    private router: Router) { }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
@@ -34,5 +36,9 @@ export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContent
 
   public delete() {
     this.deleteCource.emit(this.cource?.id);
+  }
+  public edit() {
+    this.router.navigate(['/cources', this.cource?.id])
+
   }
 }

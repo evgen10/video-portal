@@ -5,6 +5,8 @@ import { ConfirmationDialogComponent } from './modal-windows/confirmation-dialog
 import { DurationInputComponent } from './inputs/duration-input/duration-input.component';
 import { DateInputComponent } from './inputs/date-input/date-input.component';
 import { DurationPipe } from './pipes/duration.pipe';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { AppRoutingModule } from '../app.routing.module';
 
 
 
@@ -13,11 +15,13 @@ import { DurationPipe } from './pipes/duration.pipe';
     ConfirmationDialogComponent,
     DurationInputComponent,
     DateInputComponent,
-    DurationPipe
+    DurationPipe,
+    ErrorPageComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   exports: [
     CommonModule,

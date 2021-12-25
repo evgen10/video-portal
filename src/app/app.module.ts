@@ -7,6 +7,7 @@ import { ElementsModule } from './elements/elements.module';
 import { CourceModule } from './cources/cource.module';
 import { AuthModule } from './core/Auth/auth.module';
 import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app.routing.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedModule } from './shared/shared.module';
     ElementsModule,
     CourceModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [FilterCourcesPipe],
   bootstrap: [AppComponent]

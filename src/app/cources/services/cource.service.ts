@@ -66,8 +66,9 @@ export class CourceService {
   }
 
   public edit(changedCource: ICource) {
+    var index = this.videoCources.findIndex((c => c.id == changedCource.id));
+    this.videoCources[index] = changedCource;
     console.log('Edit cource')
-
   }
 
   public remove(id: number){
