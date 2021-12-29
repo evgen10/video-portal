@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   public login(loginData: ILogin) {
+    //как правильно нужно отписываться от стримов в сервисах?
     return this.httpClient.post<IToken>(this.authEndPoint, loginData).subscribe(token => {
       this.currentToken = token.token;
       this.httpClient.post<IUser>(this.userInfoEndPoint, token).subscribe(user => {

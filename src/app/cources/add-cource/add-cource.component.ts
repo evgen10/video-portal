@@ -1,6 +1,7 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
+import { Subscription } from 'rxjs';
 import { ICource } from 'src/app/core/models/cource';
 import { DateInputComponent } from 'src/app/shared/inputs/date-input/date-input.component';
 import { DurationInputComponent } from 'src/app/shared/inputs/duration-input/duration-input.component';
@@ -11,9 +12,10 @@ import { CourceService } from '../services/cource.service';
   templateUrl: './add-cource.component.html',
   styleUrls: ['./add-cource.component.scss']
 })
-export class AddCourceComponent implements OnInit, AfterViewInit {
+export class AddCourceComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private currentCource: ICource | null = null;
+  private subscriptions: Subscription[] = [];
 
   @ViewChild(DurationInputComponent)
   private durationComponent: DurationInputComponent | undefined;
@@ -29,7 +31,9 @@ export class AddCourceComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router) { }
 
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
 
   ngAfterViewInit(): void {
     // выходит ошибка ExpressionChangedAfterItHasBeenCheckedError
@@ -38,9 +42,8 @@ export class AddCourceComponent implements OnInit, AfterViewInit {
     this.dateComponent!.date = new Date(this.currentCource?.date!);
   }
 
-
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) =>{
+    const subscription = this.route.params.subscribe((params: Params) =>{
       if (+params.id) {
         this.courceService.getById(+params.id).subscribe(cource => {
           this.currentCource = cource;
@@ -54,6 +57,7 @@ export class AddCourceComponent implements OnInit, AfterViewInit {
         })
       }
     })
+    this.subscriptions.push(subscription);
   }
 
 
@@ -66,19 +70,22 @@ export class AddCourceComponent implements OnInit, AfterViewInit {
       isTopRated: false
     }
 
-    this.courceService.add(cource).subscribe(c => {
+    const subscription = this.courceService.add(cource).subscribe(c => {
       console.log('New course has been added', cource)
     });
+
+    this.subscriptions.push(subscription);
   }
 
   private editCource() {
     this.currentCource!.name = this.title;
     this.currentCource!.description = this.description;
-    this.currentCource!.length = this.durationComponent!.duration,
-      this.currentCource!.date = new Date(this.dateComponent!.date!),
-      this.courceService.edit(this.currentCource!).subscribe(cource => {
+    this.currentCource!.length = this.durationComponent!.duration;
+      this.currentCource!.date = new Date(this.dateComponent!.date!);
+      const subscription = this.courceService.edit(this.currentCource!).subscribe(cource => {
         console.log('Cource has been changed', cource);
       });
+      this.subscriptions.push(subscription);
   }
 
   private isNewCource() {

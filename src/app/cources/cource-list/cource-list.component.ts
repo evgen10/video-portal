@@ -1,10 +1,10 @@
-import { Component, DoCheck, OnInit,} from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit,} from '@angular/core';
 import { Router } from '@angular/router';
 import { ICource } from 'src/app/core/models/cource';
 import { FilterCourcesPipe } from '../cource/pipes/filter-cources.pipe';
 import { CourceService } from '../services/cource.service';
 import {map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,10 +12,11 @@ import { Observable } from 'rxjs';
   templateUrl: './cource-list.component.html',
   styleUrls: ['./cource-list.component.scss']
 })
-export class CourceListComponent implements OnInit, DoCheck {
+export class CourceListComponent implements OnInit, OnDestroy {
 
   private readonly defaultCount: number = 5;
   private deleteCourceId: number = 0;
+  private subscriptions: Subscription[] = [];
 
   public videoCources: Array<ICource> = [];
   public searchText: string = '';
@@ -27,6 +28,10 @@ export class CourceListComponent implements OnInit, DoCheck {
   constructor(
     private courceService: CourceService,
     private router: Router) { }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
 
   ngOnInit(): void {
     this.featchCources();
@@ -58,10 +63,11 @@ export class CourceListComponent implements OnInit, DoCheck {
 
   public confirmDeleteAction() {
     this.isDeleteModalShow = false;
-    this.courceService.remove(this.deleteCourceId).subscribe(x => {
+    const subscription = this.courceService.remove(this.deleteCourceId).subscribe(x => {
       this.featchCources();
       this.deleteCourceId = 0;
     });
+    this.subscriptions.push(subscription);
   }
 
   public onDeleteCource(id: number) {
@@ -75,11 +81,12 @@ export class CourceListComponent implements OnInit, DoCheck {
 
   private featchCources() {
     const count = !this.isLoadMore ? this.defaultCount : 0;
-    this.courceService.getAll(count, this.searchText).pipe(map(cources => {
+    const subscription = this.courceService.getAll(count, this.searchText).pipe(map(cources => {
       cources.map(cource => cource.date = new Date(cource.date))
       return cources;
     })).subscribe(cources => {
       this.videoCources = cources;
     });
+    this.subscriptions.push(subscription);
   }
 }
