@@ -1,7 +1,6 @@
 <app-header></app-header>
 <section class="main">
   <breadcrumbs *IfAuthenticatedShow='false'></breadcrumbs>
-  <cource-list *IfAuthenticatedShow='false'></cource-list>
+  <router-outlet></router-outlet>
 </section>
 <app-footer></app-footer>
-<login-page *IfAuthenticatedShow='true'></login-page>

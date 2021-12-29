@@ -1,4 +1,5 @@
 import { Component, DoCheck, OnInit,} from '@angular/core';
+import { Router } from '@angular/router';
 import { ICource } from 'src/app/core/models/cource';
 import { FilterCourcesPipe } from '../cource/pipes/filter-cources.pipe';
 import { CourceService } from '../services/cource.service';
@@ -16,15 +17,13 @@ export class CourceListComponent implements OnInit, DoCheck {
   public searchText: string = '';
 
   public isDeleteModalShow = false;
-  public isShowAdd = false;
-  public isShowList = false;
 
   constructor(
     private courceFilterPipe: FilterCourcesPipe,
-    private courceService: CourceService) { }
+    private courceService: CourceService,
+    private router: Router) { }
 
   ngDoCheck(): void {
-    this.isShowList = !this.isShowAdd;
     this.videoCources = this.courceService.getAll();
   }
 
@@ -34,10 +33,6 @@ export class CourceListComponent implements OnInit, DoCheck {
 
   public getCourceList() {
     return this.courceFilterPipe.transform(this.videoCources, this.searchText);
-  }
-
-  public addCource() {
-    this.isShowAdd = true;
   }
 
   public trackById(index: number, cource: ICource): number {
@@ -72,7 +67,8 @@ export class CourceListComponent implements OnInit, DoCheck {
     this.deleteCourceId = id;
   }
 
-  public onAddWindowClose(){
-    this.isShowAdd = false;
+  public addCource(){
+    this.router.navigate(['/cources', 'new']);
   }
+
 }

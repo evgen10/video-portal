@@ -9,6 +9,7 @@ import { DurationPipe } from '../shared/pipes/duration.pipe';
 import { FilterCourcesPipe } from './cource/pipes/filter-cources.pipe';
 import { CourceHighlightDirective } from './cource/directives/cource-highlight.directive';
 import { AddCourceComponent } from './add-cource/add-cource.component';
+import { AppRoutingModule } from '../app.routing.module';
 
 
 
@@ -23,7 +24,8 @@ import { AddCourceComponent } from './add-cource/add-cource.component';
     AddCourceComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [
     CourceListComponent,
