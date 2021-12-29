@@ -1,7 +1,9 @@
-export interface IUser{
+import { IName } from "./name";
+
+export interface IUser {
   id: number;
-  firstName: string;
-  lastName: string;
-  userLogin: string;
+  token: string,
+  name: IName;
+  login: string;
   password: string;
 }

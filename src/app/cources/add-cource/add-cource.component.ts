@@ -34,18 +34,24 @@ export class AddCourceComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // выходит ошибка ExpressionChangedAfterItHasBeenCheckedError
     // но значение устанавливается, не смог победить
-    this.durationComponent!.duration = this.currentCource!.duration;
-    this.dateComponent!.date = new Date(this.currentCource?.creationDate!);
+    this.durationComponent!.duration = this.currentCource!.length;
+    this.dateComponent!.date = new Date(this.currentCource?.date!);
   }
 
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) =>{
-      this.currentCource = this.courceService.getById(+params.id)
-      if (this.currentCource) {
-        this.header = "Edit";
-        this.title = this.currentCource.title,
-        this.description = this.currentCource.description
+      if (+params.id) {
+        this.courceService.getById(+params.id).subscribe(cource => {
+          this.currentCource = cource;
+          if (this.currentCource) {
+            this.header = "Edit";
+            this.title = this.currentCource.name,
+              this.description = this.currentCource.description
+          }
+        }, error => {
+          console.log(error);
+        })
       }
     })
   }
@@ -53,23 +59,26 @@ export class AddCourceComponent implements OnInit, AfterViewInit {
 
   private addNewCource() {
     const cource: ICource = {
-      id: this.courceService.setCourceId(),
-      title: this.title,
+      name: this.title,
       description: this.description,
-      duration: this.durationComponent!.duration,
-      creationDate: new Date(this.dateComponent!.date!),
-      istopRate: false
+      length: this.durationComponent!.duration,
+      date: new Date(this.dateComponent!.date!),
+      isTopRated: false
     }
 
-    this.courceService.add(cource);
+    this.courceService.add(cource).subscribe(c => {
+      console.log('New course has been added', cource)
+    });
   }
 
   private editCource() {
-    this.currentCource!.title = this.title;
+    this.currentCource!.name = this.title;
     this.currentCource!.description = this.description;
-    this.currentCource!.duration = this.durationComponent!.duration,
-    this.currentCource!.creationDate = new Date(this.dateComponent!.date!),
-    this.courceService.edit(this.currentCource!);
+    this.currentCource!.length = this.durationComponent!.duration,
+      this.currentCource!.date = new Date(this.dateComponent!.date!),
+      this.courceService.edit(this.currentCource!).subscribe(cource => {
+        console.log('Cource has been changed', cource);
+      });
   }
 
   private isNewCource() {

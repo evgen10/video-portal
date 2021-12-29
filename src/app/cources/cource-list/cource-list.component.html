@@ -6,10 +6,10 @@
     <button class="btn cource-list__add-cource" (click)="addCource()" >Add cource</button>
     <div *ngIf="isNotEmptyList(); then cources else emptyCources"></div>
     <ng-template #cources>
-      <cource (deleteCource)="onDeleteCource($event)"  *ngFor="let cource of getCourceList() | courceSort; trackBy: trackById" [cource]="cource">
+      <cource (deleteCource)="onDeleteCource($event)"  *ngFor="let cource of videoCources; trackBy: trackById" [cource]="cource">
       </cource>
       <div class="cource-list__more">
-        <a href="javascript: void(0);" (click)="loadMore()" class="cource-list__more-link">load more</a>
+          <a href="javascript: void(0);" (click)="loadMore()" class="cource-list__more-link">{{pagingText}}</a>
       </div>
     </ng-template>
     <ng-template #emptyCources>

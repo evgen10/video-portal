@@ -7,6 +7,7 @@ import { DateInputComponent } from './inputs/date-input/date-input.component';
 import { DurationPipe } from './pipes/duration.pipe';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AppRoutingModule } from '../app.routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,7 +22,8 @@ import { AppRoutingModule } from '../app.routing.module';
   imports: [
     CommonModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   exports: [
     CommonModule,
