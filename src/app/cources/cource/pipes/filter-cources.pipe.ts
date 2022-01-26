@@ -10,7 +10,7 @@ export class FilterCourcesPipe implements PipeTransform {
       return value
     }
     return value.filter(value => {
-      return value.title.toUpperCase().includes(text.trim().toUpperCase())
+      return value.name.toUpperCase().includes(text.trim().toUpperCase())
     });
   }
 }

@@ -1,8 +1,8 @@
 export interface ICource {
-  id: number;
-  title: string;
-  creationDate: Date;
-  duration: number;
+  id?: number;
+  name: string;
+  date: Date;
+  length: number;
   description: string;
-  istopRate: boolean;
+  isTopRated: boolean;
 }
