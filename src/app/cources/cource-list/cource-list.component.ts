@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { ICource } from 'src/app/core/models/cource';
 import { FilterCourcesPipe } from '../cource/pipes/filter-cources.pipe';
 import { CourceService } from '../services/cource.service';
-import {map} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
+import { LoadingService } from 'src/app/elements/services/loading.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class CourceListComponent implements OnInit, OnDestroy {
 
   constructor(
     private courceService: CourceService,
-    private router: Router) { }
+    private router: Router,
+    private loadingService: LoadingService) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe())
@@ -81,12 +83,19 @@ export class CourceListComponent implements OnInit, OnDestroy {
 
   private featchCources() {
     const count = !this.isLoadMore ? this.defaultCount : 0;
-    const subscription = this.courceService.getAll(count, this.searchText).pipe(map(cources => {
-      cources.map(cource => cource.date = new Date(cource.date))
-      return cources;
-    })).subscribe(cources => {
-      this.videoCources = cources;
-    });
+    this.loadingService.startLoading();
+    const subscription = this.courceService.getAll(count, this.searchText)
+      .pipe(map(cources => {
+        cources.map(cource => cource.date = new Date(cource.date))
+        return cources;
+      }))
+      .pipe(delay(this.loadingService.getDelay()))
+      .subscribe(
+        cources => {
+          this.videoCources = cources;
+          this.loadingService.stopLoading();
+        },
+        () => this.loadingService.stopLoading());
     this.subscriptions.push(subscription);
   }
 }

@@ -18,8 +18,6 @@ export class HeaderComponent implements OnInit {
     return this.authService.getUserInfo()!;
   }
 
-
-
   public logoff() {
     this.authService.logout();
     this.router.navigate(['/login']);
