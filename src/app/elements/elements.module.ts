@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoComponent } from './logo/logo.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../core/Auth/auth.module';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -14,7 +15,8 @@ import { AuthModule } from '../core/Auth/auth.module';
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
-    LogoComponent],
+    LogoComponent,
+    LoadingComponent],
   imports: [
     SharedModule,
     AuthModule
@@ -23,7 +25,8 @@ import { AuthModule } from '../core/Auth/auth.module';
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
-    LogoComponent
+    LogoComponent,
+    LoadingComponent
   ]
 })
 export class ElementsModule { }

@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     DurationInputComponent,
     DateInputComponent,
     DurationPipe,
-    ErrorPageComponent
+    ErrorPageComponent,
   ],
   imports: [
     CommonModule,
