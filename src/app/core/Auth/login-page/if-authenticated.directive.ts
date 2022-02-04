@@ -1,6 +1,8 @@
-import { AfterContentChecked, AfterContentInit, AfterViewInit, Directive, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { selectAuthitification } from '../store/auth.selectors';
+import { AuthState } from '../store/auth.state';
 
 @Directive({
   selector: '[IfAuthenticatedShow]'
@@ -9,6 +11,7 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
 
   private isShow: boolean = false;
   private subscriptions: Subscription[] = [];
+  private isAuthenticated$ = this.authStore.select(selectAuthitification);
 
   @Input('IfAuthenticatedShow') set showAuthed(condition: boolean) {
     this.isShow = condition;
@@ -17,7 +20,7 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
-    private authService: AuthService
+    private authStore: Store<AuthState>
   ) { }
 
   ngOnDestroy(): void {
@@ -25,7 +28,7 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const subscription = this.authService.isAuthenticated().subscribe(x => {
+    const subscription = this.isAuthenticated$.subscribe(x => {
       if (this.isShow ? !x: x) {
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
