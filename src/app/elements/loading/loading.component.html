@@ -1,3 +1,3 @@
-<div *ngIf="isLoaded" class="overlay">
+<div *ngIf="isLoaded$ | async" class="overlay">
   <div class="overlay__spinner">Loading...</div>
 </div>

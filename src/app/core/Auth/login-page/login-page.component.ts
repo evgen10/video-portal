@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { setLoader } from 'src/app/elements/loading/store/loading.actions';
+import { LoadingState } from 'src/app/elements/loading/store/loading.state';
+import { LoadingService } from 'src/app/elements/services/loading.service';
 import { ILogin } from '../../models/login';
 import { login } from '../store/auth.actions';
 import { selectAuthitification } from '../store/auth.selectors';
@@ -22,7 +25,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AuthState>,
-    private route: Router) { }
+    private route: Router,
+    private loadingStore: Store<LoadingState>) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
@@ -41,6 +45,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       login: this.userLogin,
       password: this.userPassword
     };
+    this.loadingStore.dispatch(setLoader({isLoading: true}))
     this.store.dispatch(login({ loginData: loginData }));
   }
 }
