@@ -1,11 +1,14 @@
-import { Component, DoCheck, OnDestroy, OnInit,} from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICource } from 'src/app/core/models/cource';
-import { FilterCourcesPipe } from '../cource/pipes/filter-cources.pipe';
-import { CourceService } from '../services/cource.service';
-import {delay, map} from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
-import { LoadingService } from 'src/app/elements/services/loading.service';
+import { CourcesState } from '../store/cource.state';
+import { Store } from '@ngrx/store';
+import { selectCourceList, selectIsDeleteModalShowed } from '../store/cource.selectors';
+import { changeDeleteModal, deleteCource, getCources } from '../store/cource.actions';
+import { LoadingState } from 'src/app/elements/loading/store/loading.state';
+import { setLoader } from 'src/app/elements/loading/store/loading.actions';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -13,33 +16,27 @@ import { LoadingService } from 'src/app/elements/services/loading.service';
   templateUrl: './cource-list.component.html',
   styleUrls: ['./cource-list.component.scss']
 })
-export class CourceListComponent implements OnInit, OnDestroy {
-
+export class CourceListComponent implements OnInit {
   private readonly defaultCount: number = 5;
-  private deleteCourceId: number = 0;
-  private subscriptions: Subscription[] = [];
-
-  public videoCources: Array<ICource> = [];
   public searchText: string = '';
 
-  public isDeleteModalShow = false;
+  public courcesList$: Observable<Array<ICource>> = this.courcesState.select(selectCourceList);
+  public isDeleteModalShowed$: Observable<boolean> = this.courcesState.select(selectIsDeleteModalShowed);
+  public isCourceListEmpty$: Observable<boolean> = this.courcesList$.pipe(map((x) => x.length > 1));
+
   public isLoadMore = false;
   public pagingText = 'load more';
 
   constructor(
-    private courceService: CourceService,
     private router: Router,
-    private loadingService: LoadingService) { }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe())
-  }
+    private loadingState: Store<LoadingState>,
+    private courcesState: Store<CourcesState>) { }
 
   ngOnInit(): void {
     this.featchCources();
   }
 
-  public trackById(index: number, cource: ICource): number | undefined{
+  public trackById(index: number, cource: ICource): number | undefined {
     return cource?.id
   }
 
@@ -54,48 +51,38 @@ export class CourceListComponent implements OnInit, OnDestroy {
     this.featchCources();
   }
 
-  public isNotEmptyList(): boolean {
-    return this.videoCources.length > 0;
-  }
-
   public closeDeleteModal() {
-    this.isDeleteModalShow = false;
-    this.deleteCourceId = 0;
+    this.courcesState.dispatch(changeDeleteModal({
+      deleteState:
+      {
+        isShowModal: false,
+        courceId: 0
+      }
+    }));
   }
 
   public confirmDeleteAction() {
-    this.isDeleteModalShow = false;
-    const subscription = this.courceService.remove(this.deleteCourceId).subscribe(x => {
-      this.featchCources();
-      this.deleteCourceId = 0;
-    });
-    this.subscriptions.push(subscription);
+    this.loadingState.dispatch(setLoader({ isLoading: true }));
+    this.courcesState.dispatch(deleteCource());
   }
 
   public onDeleteCource(id: number) {
-    this.isDeleteModalShow = true;
-    this.deleteCourceId = id;
+    this.courcesState.dispatch(changeDeleteModal(changeDeleteModal({
+      deleteState:
+      {
+        isShowModal: true,
+        courceId: id
+      }
+    })));
   }
 
-  public addCource(){
+  public addCource() {
     this.router.navigate(['/cources', 'new']);
   }
 
   private featchCources() {
     const count = !this.isLoadMore ? this.defaultCount : 0;
-    this.loadingService.startLoading();
-    const subscription = this.courceService.getAll(count, this.searchText)
-      .pipe(map(cources => {
-        cources.map(cource => cource.date = new Date(cource.date))
-        return cources;
-      }))
-      .pipe(delay(this.loadingService.getDelay()))
-      .subscribe(
-        cources => {
-          this.videoCources = cources;
-          this.loadingService.stopLoading();
-        },
-        () => this.loadingService.stopLoading());
-    this.subscriptions.push(subscription);
+    this.loadingState.dispatch(setLoader({ isLoading: true }));
+    this.courcesState.dispatch(getCources({ number: count, textFragment: this.searchText }));
   }
 }

@@ -35,7 +35,6 @@ export class AuthEffects {
 
   getToken$ = createEffect(() =>
       this.actions$.pipe(
-        delay(2000),
         ofType(getToken),
         switchMap((action) => this.authService.getUserInfo(action.currentToken).pipe(
           map((user) =>
