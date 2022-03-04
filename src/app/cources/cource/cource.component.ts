@@ -9,36 +9,18 @@ import { CourceService } from '../services/cource.service';
   styleUrls: ['./cource.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourceComponent implements OnInit, DoCheck, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
+export class CourceComponent {
 
   @Input() cource: ICource | null = null;
   @Output() deleteCource = new EventEmitter<number>();
 
   constructor(
-    private courceService: CourceService,
     private router: Router) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-  }
-  ngAfterContentInit(): void {
-  }
-  ngAfterContentChecked(): void {
-  }
-  ngAfterViewInit(): void {
-  }
-  ngAfterViewChecked(): void {
-  }
-  ngDoCheck(): void {
-  }
-
-  ngOnInit(): void {
-  }
 
   public delete() {
     this.deleteCource.emit(this.cource?.id);
   }
   public edit() {
     this.router.navigate(['/cources', this.cource?.id])
-
   }
 }

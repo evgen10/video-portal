@@ -1,6 +1,5 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Guid } from 'guid-typescript';
 import { Subscription } from 'rxjs';
 import { ICource } from 'src/app/core/models/cource';
 import { DateInputComponent } from 'src/app/shared/inputs/date-input/date-input.component';

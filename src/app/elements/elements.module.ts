@@ -7,6 +7,10 @@ import { LogoComponent } from './logo/logo.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../core/Auth/auth.module';
 import { LoadingComponent } from './loading/loading.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { loadingReducer } from './loading/store/loading.reducer';
+import { loadingKey } from './loading/store/loading.state';
 
 
 
@@ -19,7 +23,8 @@ import { LoadingComponent } from './loading/loading.component';
     LoadingComponent],
   imports: [
     SharedModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forFeature(loadingKey, loadingReducer),
   ],
   exports: [
     HeaderComponent,

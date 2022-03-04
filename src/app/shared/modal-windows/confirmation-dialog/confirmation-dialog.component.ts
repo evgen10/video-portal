@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CourcesState } from 'src/app/cources/store/cource.state';
 
 @Component({
   selector: 'confirmation-dialog',
@@ -7,7 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ConfirmationDialogComponent implements OnInit {
 
-  @Input() public title ='Do you really want to delete this cource?';
+  @Input() public title = '';
   @Output() public decline = new EventEmitter<void>();
   @Output() public confirm = new EventEmitter<void>();
 
